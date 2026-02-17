@@ -5,7 +5,6 @@
 const empty = {}; // Automatically has linkage to Object.prototype
 const empty1 = Object.create(Object.prototype); // Same as {}
 Object.prototype.hi = 'Some stuff'; //* FIXME:  How to tell typescript that we can this field in protototype?
-
 console.assert(empty.hi === 'Some stuff'); // Automating tests via assert
 
 const st = 'This is crazy!';
@@ -25,7 +24,6 @@ console.assert(Object.getPrototypeOf(aDisplayable) === displayable); // * -->dis
 // Function.prototype
 function doStuff() {}
 console.assert(Object.getPrototypeOf(doStuff) === Function.prototype);
-
 // adding fields to Function.prototype will end up adding fields to all functions out there.
 interface Function {
   scream: string;
@@ -44,4 +42,28 @@ console.assert(nums.getLength() === 3);
 // ! Exercise
 // Extend String.prototype with a method  isPalindrome
 
+
+
+
+String.prototype.isPalindrome=function(){
+  let a=this;
+  let arr=a.split("");
+  let rev=arr.reverse();
+  return a===rev.join("");
+}
+
+
 // ! Exercise Create an object called person. let it have name, id, and country as fields. Then create another object called citizen, that has this person object as its prototype. Let citizen additionally have fields: passportNumber, aadharNumber.
+
+const person={
+  name:"Chethan",
+  id:567,
+  country:"India"
+};
+
+const citizen=Object.create(person);
+
+citizen.passportNumber=345678;
+citizen.aadharNumber=987456789;
+
+console.log(citizen.name)
